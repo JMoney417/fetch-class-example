@@ -10,8 +10,15 @@ fetch('https://thawing-bayou-14704.herokuapp.com/labels?limit=12',
 .catch(console.error)
 
 // abstract fetch to its own function
-function request(url, method='GET', body){
-
+function request(url, method='GET', body) {
+  const options = { method }
+  if (method !== 'GET' ) {
+    options.body = body
+  }
+  return fetch(url, options)
+  .then( response => {
+    return response.json()
+  })
 }
 
 // use request to do a HTTP request
